@@ -1,6 +1,7 @@
 syntax = "proto3";
 
 import "buildingdataaccess/v1/buildingdata.proto";
+import "google/api/annotations.proto";
 
 option go_package = "go/buildingdata/v1;buildingdata";
 
@@ -11,7 +12,12 @@ service BuildingdataAccess {
 	// rpc Check (HealthCheckRequest) returns (HealthCheckResponse);
 	// rpc Watch (HealthCheckRequest) returns (stream HealthCheckResponse);
 
-    rpc CreateBuildingdata (CreateBuildingdataRequest) returns (CreateBuildingdataResponse) {}
+    rpc CreateBuildingdata (CreateBuildingdataRequest) returns (CreateBuildingdataResponse) {
+		option (google.api.http) = {
+			post: "/v1/buildingdata"
+			body: "*"
+		};
+	}
 }
 
 // message HealthCheckRequest {

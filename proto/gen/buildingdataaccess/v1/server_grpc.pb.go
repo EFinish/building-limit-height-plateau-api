@@ -43,21 +43,19 @@ func (c *buildingdataAccessClient) CreateBuildingdata(ctx context.Context, in *C
 }
 
 // BuildingdataAccessServer is the server API for BuildingdataAccess service.
-// All implementations must embed UnimplementedBuildingdataAccessServer
+// All implementations should embed UnimplementedBuildingdataAccessServer
 // for forward compatibility
 type BuildingdataAccessServer interface {
 	CreateBuildingdata(context.Context, *CreateBuildingdataRequest) (*CreateBuildingdataResponse, error)
-	mustEmbedUnimplementedBuildingdataAccessServer()
 }
 
-// UnimplementedBuildingdataAccessServer must be embedded to have forward compatible implementations.
+// UnimplementedBuildingdataAccessServer should be embedded to have forward compatible implementations.
 type UnimplementedBuildingdataAccessServer struct {
 }
 
 func (UnimplementedBuildingdataAccessServer) CreateBuildingdata(context.Context, *CreateBuildingdataRequest) (*CreateBuildingdataResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateBuildingdata not implemented")
 }
-func (UnimplementedBuildingdataAccessServer) mustEmbedUnimplementedBuildingdataAccessServer() {}
 
 // UnsafeBuildingdataAccessServer may be embedded to opt out of forward compatibility for this service.
 // Use of this interface is not recommended, as added methods to BuildingdataAccessServer will
