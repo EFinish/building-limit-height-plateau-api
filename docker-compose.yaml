@@ -1,0 +1,34 @@
+version: "3.9"  # optional since v1.27.0
+services:
+  mongo:
+    image: mongo
+    ports: 
+      - 27017:27017
+    networks:
+      - buildingdata-local
+
+  buildingdata-access:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    init: true
+    command: sh -c "cd ./services/buildingdata-access && air"
+    env_file:
+        - ././services/buildingdata-access/.env.prod
+    ports:
+      - "9002:9002"
+    volumes:
+      - ./:/app
+      - /root/.cache/go-build
+      - go-mod-cache:/go/pkg/mod
+    networks:
+      - buildingdata-local
+    depends_on:
+      - mongo
+
+
+volumes:
+  go-mod-cache:
+
+networks:
+  buildingdata-local:
