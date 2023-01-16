@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+option go_package = "go/buildingdata/v1;buildingdata";
+
+package buildingdata.v1;
+
+message BuildingLimit {
+
+}
+
+message HeightPlateau {
+
+}
+
+message SplitBuildingLimit {
+    
+}

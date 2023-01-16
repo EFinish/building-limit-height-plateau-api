@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+import "buildingdataaccess/v1/buildingdata.proto";
+
+option go_package = "go/buildingdata/v1;buildingdata";
+
+package buildingdataaccess.v1;
+
+service BuildingdataAccess {
+	// TODO
+	// rpc Check (HealthCheckRequest) returns (HealthCheckResponse);
+	// rpc Watch (HealthCheckRequest) returns (stream HealthCheckResponse);
+
+    rpc CreateBuildingdata (CreateBuildingdataRequest) returns (CreateBuildingdataResponse) {}
+}
+
+// message HealthCheckRequest {
+// 	string service = 1;
+// }
+
+// message HealthCheckResponse {
+// 	enum ServingStatus {
+// 	  UNKNOWN = 0;
+// 	  SERVING = 1;
+// 	  NOT_SERVING = 2;
+// 	  SERVICE_UNKNOWN = 3;  // Used only by the Watch method.
+// 	}
+// 	ServingStatus status = 1;
+// }
+
+message CreateBuildingdataRequest {
+	// TODO
+}
+
+message CreateBuildingdataResponse {
+	// TODO
+}
