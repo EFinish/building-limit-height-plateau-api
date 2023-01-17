@@ -24,6 +24,10 @@ type BuildingLimit struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
+
+	Id       string      `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Type     string      `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"`
+	Features []*Features `protobuf:"bytes,3,rep,name=features,proto3" json:"features,omitempty"`
 }
 
 func (x *BuildingLimit) Reset() {
@@ -58,10 +62,35 @@ func (*BuildingLimit) Descriptor() ([]byte, []int) {
 	return file_buildingdataaccess_v1_buildingdata_proto_rawDescGZIP(), []int{0}
 }
 
+func (x *BuildingLimit) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *BuildingLimit) GetType() string {
+	if x != nil {
+		return x.Type
+	}
+	return ""
+}
+
+func (x *BuildingLimit) GetFeatures() []*Features {
+	if x != nil {
+		return x.Features
+	}
+	return nil
+}
+
 type HeightPlateau struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
+
+	Id       string      `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Type     string      `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"`
+	Features []*Features `protobuf:"bytes,3,rep,name=features,proto3" json:"features,omitempty"`
 }
 
 func (x *HeightPlateau) Reset() {
@@ -96,10 +125,33 @@ func (*HeightPlateau) Descriptor() ([]byte, []int) {
 	return file_buildingdataaccess_v1_buildingdata_proto_rawDescGZIP(), []int{1}
 }
 
+func (x *HeightPlateau) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *HeightPlateau) GetType() string {
+	if x != nil {
+		return x.Type
+	}
+	return ""
+}
+
+func (x *HeightPlateau) GetFeatures() []*Features {
+	if x != nil {
+		return x.Features
+	}
+	return nil
+}
+
 type SplitBuildingLimit struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
+
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 }
 
 func (x *SplitBuildingLimit) Reset() {
@@ -134,19 +186,281 @@ func (*SplitBuildingLimit) Descriptor() ([]byte, []int) {
 	return file_buildingdataaccess_v1_buildingdata_proto_rawDescGZIP(), []int{2}
 }
 
+func (x *SplitBuildingLimit) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+type Features struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Type       string      `protobuf:"bytes,1,opt,name=type,proto3" json:"type,omitempty"`
+	Properties *Properties `protobuf:"bytes,2,opt,name=properties,proto3" json:"properties,omitempty"`
+	Geometry   *Geometry   `protobuf:"bytes,3,opt,name=geometry,proto3" json:"geometry,omitempty"`
+}
+
+func (x *Features) Reset() {
+	*x = Features{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_buildingdataaccess_v1_buildingdata_proto_msgTypes[3]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *Features) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Features) ProtoMessage() {}
+
+func (x *Features) ProtoReflect() protoreflect.Message {
+	mi := &file_buildingdataaccess_v1_buildingdata_proto_msgTypes[3]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Features.ProtoReflect.Descriptor instead.
+func (*Features) Descriptor() ([]byte, []int) {
+	return file_buildingdataaccess_v1_buildingdata_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *Features) GetType() string {
+	if x != nil {
+		return x.Type
+	}
+	return ""
+}
+
+func (x *Features) GetProperties() *Properties {
+	if x != nil {
+		return x.Properties
+	}
+	return nil
+}
+
+func (x *Features) GetGeometry() *Geometry {
+	if x != nil {
+		return x.Geometry
+	}
+	return nil
+}
+
+type Properties struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Elevation float64 `protobuf:"fixed64,1,opt,name=elevation,proto3" json:"elevation,omitempty"`
+}
+
+func (x *Properties) Reset() {
+	*x = Properties{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_buildingdataaccess_v1_buildingdata_proto_msgTypes[4]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *Properties) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Properties) ProtoMessage() {}
+
+func (x *Properties) ProtoReflect() protoreflect.Message {
+	mi := &file_buildingdataaccess_v1_buildingdata_proto_msgTypes[4]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Properties.ProtoReflect.Descriptor instead.
+func (*Properties) Descriptor() ([]byte, []int) {
+	return file_buildingdataaccess_v1_buildingdata_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *Properties) GetElevation() float64 {
+	if x != nil {
+		return x.Elevation
+	}
+	return 0
+}
+
+type Geometry struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Type        string        `protobuf:"bytes,1,opt,name=type,proto3" json:"type,omitempty"`
+	Coordinates []*Coordinate `protobuf:"bytes,2,rep,name=coordinates,proto3" json:"coordinates,omitempty"`
+}
+
+func (x *Geometry) Reset() {
+	*x = Geometry{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_buildingdataaccess_v1_buildingdata_proto_msgTypes[5]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *Geometry) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Geometry) ProtoMessage() {}
+
+func (x *Geometry) ProtoReflect() protoreflect.Message {
+	mi := &file_buildingdataaccess_v1_buildingdata_proto_msgTypes[5]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Geometry.ProtoReflect.Descriptor instead.
+func (*Geometry) Descriptor() ([]byte, []int) {
+	return file_buildingdataaccess_v1_buildingdata_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *Geometry) GetType() string {
+	if x != nil {
+		return x.Type
+	}
+	return ""
+}
+
+func (x *Geometry) GetCoordinates() []*Coordinate {
+	if x != nil {
+		return x.Coordinates
+	}
+	return nil
+}
+
+type Coordinate struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Longitude float64 `protobuf:"fixed64,1,opt,name=longitude,proto3" json:"longitude,omitempty"`
+	Latitude  float64 `protobuf:"fixed64,2,opt,name=latitude,proto3" json:"latitude,omitempty"`
+}
+
+func (x *Coordinate) Reset() {
+	*x = Coordinate{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_buildingdataaccess_v1_buildingdata_proto_msgTypes[6]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *Coordinate) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Coordinate) ProtoMessage() {}
+
+func (x *Coordinate) ProtoReflect() protoreflect.Message {
+	mi := &file_buildingdataaccess_v1_buildingdata_proto_msgTypes[6]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Coordinate.ProtoReflect.Descriptor instead.
+func (*Coordinate) Descriptor() ([]byte, []int) {
+	return file_buildingdataaccess_v1_buildingdata_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *Coordinate) GetLongitude() float64 {
+	if x != nil {
+		return x.Longitude
+	}
+	return 0
+}
+
+func (x *Coordinate) GetLatitude() float64 {
+	if x != nil {
+		return x.Latitude
+	}
+	return 0
+}
+
 var File_buildingdataaccess_v1_buildingdata_proto protoreflect.FileDescriptor
 
 var file_buildingdataaccess_v1_buildingdata_proto_rawDesc = []byte{
 	0x0a, 0x28, 0x62, 0x75, 0x69, 0x6c, 0x64, 0x69, 0x6e, 0x67, 0x64, 0x61, 0x74, 0x61, 0x61, 0x63,
 	0x63, 0x65, 0x73, 0x73, 0x2f, 0x76, 0x31, 0x2f, 0x62, 0x75, 0x69, 0x6c, 0x64, 0x69, 0x6e, 0x67,
 	0x64, 0x61, 0x74, 0x61, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x0f, 0x62, 0x75, 0x69, 0x6c,
-	0x64, 0x69, 0x6e, 0x67, 0x64, 0x61, 0x74, 0x61, 0x2e, 0x76, 0x31, 0x22, 0x0f, 0x0a, 0x0d, 0x42,
-	0x75, 0x69, 0x6c, 0x64, 0x69, 0x6e, 0x67, 0x4c, 0x69, 0x6d, 0x69, 0x74, 0x22, 0x0f, 0x0a, 0x0d,
-	0x48, 0x65, 0x69, 0x67, 0x68, 0x74, 0x50, 0x6c, 0x61, 0x74, 0x65, 0x61, 0x75, 0x22, 0x14, 0x0a,
-	0x12, 0x53, 0x70, 0x6c, 0x69, 0x74, 0x42, 0x75, 0x69, 0x6c, 0x64, 0x69, 0x6e, 0x67, 0x4c, 0x69,
-	0x6d, 0x69, 0x74, 0x42, 0x21, 0x5a, 0x1f, 0x67, 0x6f, 0x2f, 0x62, 0x75, 0x69, 0x6c, 0x64, 0x69,
-	0x6e, 0x67, 0x64, 0x61, 0x74, 0x61, 0x2f, 0x76, 0x31, 0x3b, 0x62, 0x75, 0x69, 0x6c, 0x64, 0x69,
-	0x6e, 0x67, 0x64, 0x61, 0x74, 0x61, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x64, 0x69, 0x6e, 0x67, 0x64, 0x61, 0x74, 0x61, 0x2e, 0x76, 0x31, 0x22, 0x6a, 0x0a, 0x0d, 0x42,
+	0x75, 0x69, 0x6c, 0x64, 0x69, 0x6e, 0x67, 0x4c, 0x69, 0x6d, 0x69, 0x74, 0x12, 0x0e, 0x0a, 0x02,
+	0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x12, 0x12, 0x0a, 0x04,
+	0x74, 0x79, 0x70, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x74, 0x79, 0x70, 0x65,
+	0x12, 0x35, 0x0a, 0x08, 0x66, 0x65, 0x61, 0x74, 0x75, 0x72, 0x65, 0x73, 0x18, 0x03, 0x20, 0x03,
+	0x28, 0x0b, 0x32, 0x19, 0x2e, 0x62, 0x75, 0x69, 0x6c, 0x64, 0x69, 0x6e, 0x67, 0x64, 0x61, 0x74,
+	0x61, 0x2e, 0x76, 0x31, 0x2e, 0x46, 0x65, 0x61, 0x74, 0x75, 0x72, 0x65, 0x73, 0x52, 0x08, 0x66,
+	0x65, 0x61, 0x74, 0x75, 0x72, 0x65, 0x73, 0x22, 0x6a, 0x0a, 0x0d, 0x48, 0x65, 0x69, 0x67, 0x68,
+	0x74, 0x50, 0x6c, 0x61, 0x74, 0x65, 0x61, 0x75, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x12, 0x12, 0x0a, 0x04, 0x74, 0x79, 0x70, 0x65,
+	0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x74, 0x79, 0x70, 0x65, 0x12, 0x35, 0x0a, 0x08,
+	0x66, 0x65, 0x61, 0x74, 0x75, 0x72, 0x65, 0x73, 0x18, 0x03, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x19,
+	0x2e, 0x62, 0x75, 0x69, 0x6c, 0x64, 0x69, 0x6e, 0x67, 0x64, 0x61, 0x74, 0x61, 0x2e, 0x76, 0x31,
+	0x2e, 0x46, 0x65, 0x61, 0x74, 0x75, 0x72, 0x65, 0x73, 0x52, 0x08, 0x66, 0x65, 0x61, 0x74, 0x75,
+	0x72, 0x65, 0x73, 0x22, 0x24, 0x0a, 0x12, 0x53, 0x70, 0x6c, 0x69, 0x74, 0x42, 0x75, 0x69, 0x6c,
+	0x64, 0x69, 0x6e, 0x67, 0x4c, 0x69, 0x6d, 0x69, 0x74, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18,
+	0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x22, 0x92, 0x01, 0x0a, 0x08, 0x46, 0x65,
+	0x61, 0x74, 0x75, 0x72, 0x65, 0x73, 0x12, 0x12, 0x0a, 0x04, 0x74, 0x79, 0x70, 0x65, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x74, 0x79, 0x70, 0x65, 0x12, 0x3b, 0x0a, 0x0a, 0x70, 0x72,
+	0x6f, 0x70, 0x65, 0x72, 0x74, 0x69, 0x65, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1b,
+	0x2e, 0x62, 0x75, 0x69, 0x6c, 0x64, 0x69, 0x6e, 0x67, 0x64, 0x61, 0x74, 0x61, 0x2e, 0x76, 0x31,
+	0x2e, 0x50, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x69, 0x65, 0x73, 0x52, 0x0a, 0x70, 0x72, 0x6f,
+	0x70, 0x65, 0x72, 0x74, 0x69, 0x65, 0x73, 0x12, 0x35, 0x0a, 0x08, 0x67, 0x65, 0x6f, 0x6d, 0x65,
+	0x74, 0x72, 0x79, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x19, 0x2e, 0x62, 0x75, 0x69, 0x6c,
+	0x64, 0x69, 0x6e, 0x67, 0x64, 0x61, 0x74, 0x61, 0x2e, 0x76, 0x31, 0x2e, 0x47, 0x65, 0x6f, 0x6d,
+	0x65, 0x74, 0x72, 0x79, 0x52, 0x08, 0x67, 0x65, 0x6f, 0x6d, 0x65, 0x74, 0x72, 0x79, 0x22, 0x2a,
+	0x0a, 0x0a, 0x50, 0x72, 0x6f, 0x70, 0x65, 0x72, 0x74, 0x69, 0x65, 0x73, 0x12, 0x1c, 0x0a, 0x09,
+	0x65, 0x6c, 0x65, 0x76, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x01, 0x20, 0x01, 0x28, 0x01, 0x52,
+	0x09, 0x65, 0x6c, 0x65, 0x76, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x22, 0x5d, 0x0a, 0x08, 0x47, 0x65,
+	0x6f, 0x6d, 0x65, 0x74, 0x72, 0x79, 0x12, 0x12, 0x0a, 0x04, 0x74, 0x79, 0x70, 0x65, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x74, 0x79, 0x70, 0x65, 0x12, 0x3d, 0x0a, 0x0b, 0x63, 0x6f,
+	0x6f, 0x72, 0x64, 0x69, 0x6e, 0x61, 0x74, 0x65, 0x73, 0x18, 0x02, 0x20, 0x03, 0x28, 0x0b, 0x32,
+	0x1b, 0x2e, 0x62, 0x75, 0x69, 0x6c, 0x64, 0x69, 0x6e, 0x67, 0x64, 0x61, 0x74, 0x61, 0x2e, 0x76,
+	0x31, 0x2e, 0x43, 0x6f, 0x6f, 0x72, 0x64, 0x69, 0x6e, 0x61, 0x74, 0x65, 0x52, 0x0b, 0x63, 0x6f,
+	0x6f, 0x72, 0x64, 0x69, 0x6e, 0x61, 0x74, 0x65, 0x73, 0x22, 0x46, 0x0a, 0x0a, 0x43, 0x6f, 0x6f,
+	0x72, 0x64, 0x69, 0x6e, 0x61, 0x74, 0x65, 0x12, 0x1c, 0x0a, 0x09, 0x6c, 0x6f, 0x6e, 0x67, 0x69,
+	0x74, 0x75, 0x64, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x01, 0x52, 0x09, 0x6c, 0x6f, 0x6e, 0x67,
+	0x69, 0x74, 0x75, 0x64, 0x65, 0x12, 0x1a, 0x0a, 0x08, 0x6c, 0x61, 0x74, 0x69, 0x74, 0x75, 0x64,
+	0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x01, 0x52, 0x08, 0x6c, 0x61, 0x74, 0x69, 0x74, 0x75, 0x64,
+	0x65, 0x42, 0x21, 0x5a, 0x1f, 0x67, 0x6f, 0x2f, 0x62, 0x75, 0x69, 0x6c, 0x64, 0x69, 0x6e, 0x67,
+	0x64, 0x61, 0x74, 0x61, 0x2f, 0x76, 0x31, 0x3b, 0x62, 0x75, 0x69, 0x6c, 0x64, 0x69, 0x6e, 0x67,
+	0x64, 0x61, 0x74, 0x61, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -161,18 +475,27 @@ func file_buildingdataaccess_v1_buildingdata_proto_rawDescGZIP() []byte {
 	return file_buildingdataaccess_v1_buildingdata_proto_rawDescData
 }
 
-var file_buildingdataaccess_v1_buildingdata_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_buildingdataaccess_v1_buildingdata_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
 var file_buildingdataaccess_v1_buildingdata_proto_goTypes = []interface{}{
 	(*BuildingLimit)(nil),      // 0: buildingdata.v1.BuildingLimit
 	(*HeightPlateau)(nil),      // 1: buildingdata.v1.HeightPlateau
 	(*SplitBuildingLimit)(nil), // 2: buildingdata.v1.SplitBuildingLimit
+	(*Features)(nil),           // 3: buildingdata.v1.Features
+	(*Properties)(nil),         // 4: buildingdata.v1.Properties
+	(*Geometry)(nil),           // 5: buildingdata.v1.Geometry
+	(*Coordinate)(nil),         // 6: buildingdata.v1.Coordinate
 }
 var file_buildingdataaccess_v1_buildingdata_proto_depIdxs = []int32{
-	0, // [0:0] is the sub-list for method output_type
-	0, // [0:0] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	3, // 0: buildingdata.v1.BuildingLimit.features:type_name -> buildingdata.v1.Features
+	3, // 1: buildingdata.v1.HeightPlateau.features:type_name -> buildingdata.v1.Features
+	4, // 2: buildingdata.v1.Features.properties:type_name -> buildingdata.v1.Properties
+	5, // 3: buildingdata.v1.Features.geometry:type_name -> buildingdata.v1.Geometry
+	6, // 4: buildingdata.v1.Geometry.coordinates:type_name -> buildingdata.v1.Coordinate
+	5, // [5:5] is the sub-list for method output_type
+	5, // [5:5] is the sub-list for method input_type
+	5, // [5:5] is the sub-list for extension type_name
+	5, // [5:5] is the sub-list for extension extendee
+	0, // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_buildingdataaccess_v1_buildingdata_proto_init() }
@@ -217,6 +540,54 @@ func file_buildingdataaccess_v1_buildingdata_proto_init() {
 				return nil
 			}
 		}
+		file_buildingdataaccess_v1_buildingdata_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*Features); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_buildingdataaccess_v1_buildingdata_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*Properties); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_buildingdataaccess_v1_buildingdata_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*Geometry); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_buildingdataaccess_v1_buildingdata_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*Coordinate); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -224,7 +595,7 @@ func file_buildingdataaccess_v1_buildingdata_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_buildingdataaccess_v1_buildingdata_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   3,
+			NumMessages:   7,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
