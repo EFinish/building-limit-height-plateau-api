@@ -6,37 +6,20 @@ package buildingdata.v1;
 
 message BuildingLimit {
     string id = 1; // @gotags: bson:"_id"
-    string type = 2; // @gotags: bson:"type"
-	repeated Features features = 3;
+	repeated Coordinate polygon_coordinates = 2; // @gotags: bson:"polygon_coordinates"
 }
 
 message HeightPlateau {
     string id = 1; // @gotags: bson:"_id"
-    string type = 2; // @gotags: bson:"type"
-	repeated Features features = 3; // @gotags: bson:"features"
+	double elevation = 2; // @gotags: bson:"elevation"
+    repeated Coordinate polygon_coordinates = 3; // @gotags: bson:"polygon_coordinates"
 }
 
 message SplitBuildingLimit {
     string id = 1; // @gotags: bson:"_id"
-	BuildingLimit building_limit = 2; // @gotags: bson:"building_limit"
-	HeightPlateau height_plateau = 3; // @gotags: bson:"height_plateau"
-	Coordinate intersection = 4; // @gotags: bson:"intersection"
+	double corresponding_height_plateau_elevation = 2; //@gotags: bson:"corresponding_height_plateau_elevation"
+	repeated Coordinate polygon_coordinates = 3; // @gotags: bson:"polygon_coordinates"
 }
-
-message Features {
-	string type = 1; // @gotags: bson:"_id"
-	Properties properties = 2; // @gotags: bson:"properties"
-	Geometry geometry = 3; // @gotags: bson:"geometry"
-}
-
-message Properties {
-	double elevation = 1; // @gotags: bson:"elevation"
-}
-
-message Geometry {
-	string type = 1; // @gotags: bson:"type"
-	repeated Coordinate coordinates = 2; // @gotags: bson:"coordinates"
-} 
 
 message Coordinate {
     double longitude = 1; // @gotags: bson:"latitude"
