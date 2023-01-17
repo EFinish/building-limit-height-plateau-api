@@ -14,6 +14,7 @@ type Coordinate struct {
 
 func (s *BuildingdataAccessServiceServer) CreateBuildingdata(ctx context.Context, req *protoOut.CreateBuildingdataRequest) (*protoOut.CreateBuildingdataResponse, error) {
 	// coordinates := req.BuildingLimits.Features[0].Geometry.Coordinates
+	ba.logger.Infof("potato")
 
 	return &protoOut.CreateBuildingdataResponse{}, nil
 }
