@@ -36,8 +36,8 @@ service BuildingdataAccess {
 
 message CreateBuildingdataRequest {
 	// TODO
-	RequestBuildingLimit building_limit = 1;
-	RequestHeightPlateau height_plateau = 2;
+	RequestBuildingLimit building_limits = 1;
+	RequestHeightPlateau height_plateaus = 2;
 }
 
 message CreateBuildingdataResponse {
