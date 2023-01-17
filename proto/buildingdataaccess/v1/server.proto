@@ -36,8 +36,44 @@ service BuildingdataAccess {
 
 message CreateBuildingdataRequest {
 	// TODO
+	RequestBuildingLimit building_limit = 1;
+	RequestHeightPlateau height_plateau = 2;
 }
 
 message CreateBuildingdataResponse {
 	// TODO
+}
+
+message RequestBuildingLimit {
+	string type = 1;
+	repeated RequestFeatures features = 2;
+}
+
+message RequestFeatures {
+	string type = 1;
+	RequestProperties properties = 2;
+	RequestGeometry geometry = 3;
+}
+
+message RequestProperties {
+	double elevation = 1;
+}
+
+message RequestGeometry {
+	string type = 1;
+	repeated RequestCoordinates coordinates = 2;
+}
+
+message RequestCoordinates {
+	repeated RequestCoordinatesInner middle = 1;
+}
+
+// TODO make sure that this works?... three dimensional json arrays...
+message RequestCoordinatesInner {
+	repeated double inner = 1;
+}
+
+message RequestHeightPlateau {
+	string type = 1;
+	RequestFeatures features = 2;
 }
