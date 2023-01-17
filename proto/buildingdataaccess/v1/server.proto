@@ -67,5 +67,5 @@ message RequestProperties {
 
 message RequestGeometry {
 	string type = 1;
-	repeated google.protobuf.Value coordinates = 2;
+	repeated google.protobuf.ListValue coordinates = 2;
 } 
