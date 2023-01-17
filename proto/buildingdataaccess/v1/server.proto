@@ -75,5 +75,5 @@ message RequestCoordinatesInner {
 
 message RequestHeightPlateau {
 	string type = 1;
-	RequestFeatures features = 2;
+	repeated RequestFeatures features = 2;
 }
