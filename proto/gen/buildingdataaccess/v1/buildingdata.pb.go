@@ -25,8 +25,8 @@ type BuildingLimit struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id       string      `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	Type     string      `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"`
+	Id       string      `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty" bson:"_id"`     // @gotags: bson:"_id"
+	Type     string      `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty" bson:"type"` // @gotags: bson:"type"
 	Features []*Features `protobuf:"bytes,3,rep,name=features,proto3" json:"features,omitempty"`
 }
 
@@ -88,9 +88,9 @@ type HeightPlateau struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id       string      `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	Type     string      `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"`
-	Features []*Features `protobuf:"bytes,3,rep,name=features,proto3" json:"features,omitempty"`
+	Id       string      `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty" bson:"_id"`             // @gotags: bson:"_id"
+	Type     string      `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty" bson:"type"`         // @gotags: bson:"type"
+	Features []*Features `protobuf:"bytes,3,rep,name=features,proto3" json:"features,omitempty" bson:"features"` // @gotags: bson:"features"
 }
 
 func (x *HeightPlateau) Reset() {
@@ -151,7 +151,10 @@ type SplitBuildingLimit struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Id            string         `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty" bson:"_id"`                                            // @gotags: bson:"_id"
+	BuildingLimit *BuildingLimit `protobuf:"bytes,2,opt,name=building_limit,json=buildingLimit,proto3" json:"building_limit,omitempty" bson:"building_limit"` // @gotags: bson:"building_limit"
+	HeightPlateau *HeightPlateau `protobuf:"bytes,3,opt,name=height_plateau,json=heightPlateau,proto3" json:"height_plateau,omitempty" bson:"height_plateau"` // @gotags: bson:"height_plateau"
+	Intersection  *Coordinate    `protobuf:"bytes,4,opt,name=intersection,proto3" json:"intersection,omitempty" bson:"intersection"`                        // @gotags: bson:"intersection"
 }
 
 func (x *SplitBuildingLimit) Reset() {
@@ -193,14 +196,35 @@ func (x *SplitBuildingLimit) GetId() string {
 	return ""
 }
 
+func (x *SplitBuildingLimit) GetBuildingLimit() *BuildingLimit {
+	if x != nil {
+		return x.BuildingLimit
+	}
+	return nil
+}
+
+func (x *SplitBuildingLimit) GetHeightPlateau() *HeightPlateau {
+	if x != nil {
+		return x.HeightPlateau
+	}
+	return nil
+}
+
+func (x *SplitBuildingLimit) GetIntersection() *Coordinate {
+	if x != nil {
+		return x.Intersection
+	}
+	return nil
+}
+
 type Features struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Type       string      `protobuf:"bytes,1,opt,name=type,proto3" json:"type,omitempty"`
-	Properties *Properties `protobuf:"bytes,2,opt,name=properties,proto3" json:"properties,omitempty"`
-	Geometry   *Geometry   `protobuf:"bytes,3,opt,name=geometry,proto3" json:"geometry,omitempty"`
+	Type       string      `protobuf:"bytes,1,opt,name=type,proto3" json:"type,omitempty" bson:"_id"`             // @gotags: bson:"_id"
+	Properties *Properties `protobuf:"bytes,2,opt,name=properties,proto3" json:"properties,omitempty" bson:"properties"` // @gotags: bson:"properties"
+	Geometry   *Geometry   `protobuf:"bytes,3,opt,name=geometry,proto3" json:"geometry,omitempty" bson:"geometry"`     // @gotags: bson:"geometry"
 }
 
 func (x *Features) Reset() {
@@ -261,7 +285,7 @@ type Properties struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Elevation float64 `protobuf:"fixed64,1,opt,name=elevation,proto3" json:"elevation,omitempty"`
+	Elevation float64 `protobuf:"fixed64,1,opt,name=elevation,proto3" json:"elevation,omitempty" bson:"elevation"` // @gotags: bson:"elevation"
 }
 
 func (x *Properties) Reset() {
@@ -308,8 +332,8 @@ type Geometry struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Type        string        `protobuf:"bytes,1,opt,name=type,proto3" json:"type,omitempty"`
-	Coordinates []*Coordinate `protobuf:"bytes,2,rep,name=coordinates,proto3" json:"coordinates,omitempty"`
+	Type        string        `protobuf:"bytes,1,opt,name=type,proto3" json:"type,omitempty" bson:"type"`               // @gotags: bson:"type"
+	Coordinates []*Coordinate `protobuf:"bytes,2,rep,name=coordinates,proto3" json:"coordinates,omitempty" bson:"coordinates"` // @gotags: bson:"coordinates"
 }
 
 func (x *Geometry) Reset() {
@@ -363,8 +387,8 @@ type Coordinate struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Longitude float64 `protobuf:"fixed64,1,opt,name=longitude,proto3" json:"longitude,omitempty"`
-	Latitude  float64 `protobuf:"fixed64,2,opt,name=latitude,proto3" json:"latitude,omitempty"`
+	Longitude float64 `protobuf:"fixed64,1,opt,name=longitude,proto3" json:"longitude,omitempty" bson:"latitude"` // @gotags: bson:"latitude"
+	Latitude  float64 `protobuf:"fixed64,2,opt,name=latitude,proto3" json:"latitude,omitempty" bson:"longitude"`   // @gotags: bson:"longitude"
 }
 
 func (x *Coordinate) Reset() {
@@ -433,9 +457,22 @@ var file_buildingdataaccess_v1_buildingdata_proto_rawDesc = []byte{
 	0x66, 0x65, 0x61, 0x74, 0x75, 0x72, 0x65, 0x73, 0x18, 0x03, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x19,
 	0x2e, 0x62, 0x75, 0x69, 0x6c, 0x64, 0x69, 0x6e, 0x67, 0x64, 0x61, 0x74, 0x61, 0x2e, 0x76, 0x31,
 	0x2e, 0x46, 0x65, 0x61, 0x74, 0x75, 0x72, 0x65, 0x73, 0x52, 0x08, 0x66, 0x65, 0x61, 0x74, 0x75,
-	0x72, 0x65, 0x73, 0x22, 0x24, 0x0a, 0x12, 0x53, 0x70, 0x6c, 0x69, 0x74, 0x42, 0x75, 0x69, 0x6c,
-	0x64, 0x69, 0x6e, 0x67, 0x4c, 0x69, 0x6d, 0x69, 0x74, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18,
-	0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x22, 0x92, 0x01, 0x0a, 0x08, 0x46, 0x65,
+	0x72, 0x65, 0x73, 0x22, 0xf3, 0x01, 0x0a, 0x12, 0x53, 0x70, 0x6c, 0x69, 0x74, 0x42, 0x75, 0x69,
+	0x6c, 0x64, 0x69, 0x6e, 0x67, 0x4c, 0x69, 0x6d, 0x69, 0x74, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x12, 0x45, 0x0a, 0x0e, 0x62, 0x75,
+	0x69, 0x6c, 0x64, 0x69, 0x6e, 0x67, 0x5f, 0x6c, 0x69, 0x6d, 0x69, 0x74, 0x18, 0x02, 0x20, 0x01,
+	0x28, 0x0b, 0x32, 0x1e, 0x2e, 0x62, 0x75, 0x69, 0x6c, 0x64, 0x69, 0x6e, 0x67, 0x64, 0x61, 0x74,
+	0x61, 0x2e, 0x76, 0x31, 0x2e, 0x42, 0x75, 0x69, 0x6c, 0x64, 0x69, 0x6e, 0x67, 0x4c, 0x69, 0x6d,
+	0x69, 0x74, 0x52, 0x0d, 0x62, 0x75, 0x69, 0x6c, 0x64, 0x69, 0x6e, 0x67, 0x4c, 0x69, 0x6d, 0x69,
+	0x74, 0x12, 0x45, 0x0a, 0x0e, 0x68, 0x65, 0x69, 0x67, 0x68, 0x74, 0x5f, 0x70, 0x6c, 0x61, 0x74,
+	0x65, 0x61, 0x75, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1e, 0x2e, 0x62, 0x75, 0x69, 0x6c,
+	0x64, 0x69, 0x6e, 0x67, 0x64, 0x61, 0x74, 0x61, 0x2e, 0x76, 0x31, 0x2e, 0x48, 0x65, 0x69, 0x67,
+	0x68, 0x74, 0x50, 0x6c, 0x61, 0x74, 0x65, 0x61, 0x75, 0x52, 0x0d, 0x68, 0x65, 0x69, 0x67, 0x68,
+	0x74, 0x50, 0x6c, 0x61, 0x74, 0x65, 0x61, 0x75, 0x12, 0x3f, 0x0a, 0x0c, 0x69, 0x6e, 0x74, 0x65,
+	0x72, 0x73, 0x65, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1b,
+	0x2e, 0x62, 0x75, 0x69, 0x6c, 0x64, 0x69, 0x6e, 0x67, 0x64, 0x61, 0x74, 0x61, 0x2e, 0x76, 0x31,
+	0x2e, 0x43, 0x6f, 0x6f, 0x72, 0x64, 0x69, 0x6e, 0x61, 0x74, 0x65, 0x52, 0x0c, 0x69, 0x6e, 0x74,
+	0x65, 0x72, 0x73, 0x65, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x22, 0x92, 0x01, 0x0a, 0x08, 0x46, 0x65,
 	0x61, 0x74, 0x75, 0x72, 0x65, 0x73, 0x12, 0x12, 0x0a, 0x04, 0x74, 0x79, 0x70, 0x65, 0x18, 0x01,
 	0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x74, 0x79, 0x70, 0x65, 0x12, 0x3b, 0x0a, 0x0a, 0x70, 0x72,
 	0x6f, 0x70, 0x65, 0x72, 0x74, 0x69, 0x65, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1b,
@@ -488,14 +525,17 @@ var file_buildingdataaccess_v1_buildingdata_proto_goTypes = []interface{}{
 var file_buildingdataaccess_v1_buildingdata_proto_depIdxs = []int32{
 	3, // 0: buildingdata.v1.BuildingLimit.features:type_name -> buildingdata.v1.Features
 	3, // 1: buildingdata.v1.HeightPlateau.features:type_name -> buildingdata.v1.Features
-	4, // 2: buildingdata.v1.Features.properties:type_name -> buildingdata.v1.Properties
-	5, // 3: buildingdata.v1.Features.geometry:type_name -> buildingdata.v1.Geometry
-	6, // 4: buildingdata.v1.Geometry.coordinates:type_name -> buildingdata.v1.Coordinate
-	5, // [5:5] is the sub-list for method output_type
-	5, // [5:5] is the sub-list for method input_type
-	5, // [5:5] is the sub-list for extension type_name
-	5, // [5:5] is the sub-list for extension extendee
-	0, // [0:5] is the sub-list for field type_name
+	0, // 2: buildingdata.v1.SplitBuildingLimit.building_limit:type_name -> buildingdata.v1.BuildingLimit
+	1, // 3: buildingdata.v1.SplitBuildingLimit.height_plateau:type_name -> buildingdata.v1.HeightPlateau
+	6, // 4: buildingdata.v1.SplitBuildingLimit.intersection:type_name -> buildingdata.v1.Coordinate
+	4, // 5: buildingdata.v1.Features.properties:type_name -> buildingdata.v1.Properties
+	5, // 6: buildingdata.v1.Features.geometry:type_name -> buildingdata.v1.Geometry
+	6, // 7: buildingdata.v1.Geometry.coordinates:type_name -> buildingdata.v1.Coordinate
+	8, // [8:8] is the sub-list for method output_type
+	8, // [8:8] is the sub-list for method input_type
+	8, // [8:8] is the sub-list for extension type_name
+	8, // [8:8] is the sub-list for extension extendee
+	0, // [0:8] is the sub-list for field type_name
 }
 
 func init() { file_buildingdataaccess_v1_buildingdata_proto_init() }
