@@ -68,10 +68,7 @@ func getSplitBuildingLimitsFromPolygons(ctx context.Context, buildingLimitPolygo
 	var splitBuildingLimits []*protoOut.SplitBuildingLimit
 
 	for _, blPolygon := range buildingLimitPolygons {
-		ba.logger.Infof("area of BL polygon: %+v", blPolygon.Area())
 		for _, hpPolygon := range heightPlateauPolygons {
-			ba.logger.Infof("area of HP polygon: %+v", hpPolygon.Area())
-
 			if !blPolygon.Intersects(&hpPolygon) {
 				ba.logger.Debugf("polygons do not intersect")
 

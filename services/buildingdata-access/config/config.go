@@ -19,7 +19,7 @@ func NewConfig() Config {
 	c := Config{}
 
 	// Set defaults
-	c.BuildingdataDbURL = ""
+	c.BuildingdataDbURL = "mongodb://mongo:27017"
 	c.GrpcPort = "9002"
 
 	return c
