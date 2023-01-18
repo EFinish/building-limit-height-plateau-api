@@ -10,7 +10,15 @@ import (
 	"github.com/golang/geo/s2"
 )
 
+const SERVER_ERROR_MESSAGE = "error while creating building data"
+
 func (s *BuildingdataAccessServiceServer) CreateBuildingdata(ctx context.Context, req *protoOut.CreateBuildingdataRequest) (*protoOut.CreateBuildingdataResponse, error) {
+	err := validateExtra(ctx, req)
+
+	if err != nil {
+		return nil, fmt.Errorf("validation Error: %s", err)
+	}
+
 	var buildingLimitPolygons []s2.Polygon
 
 	for _, feature := range req.BuildingLimits.Features {
@@ -18,13 +26,17 @@ func (s *BuildingdataAccessServiceServer) CreateBuildingdata(ctx context.Context
 		coordinates, err := getCoordinatesFromFeature(ctx, feature)
 
 		if err != nil {
-			return nil, fmt.Errorf("while parsing coordinates from a feature: %w", err)
+			ba.logger.Errorf("while parsing coordinates from a feature: %w", err)
+
+			return nil, fmt.Errorf(SERVER_ERROR_MESSAGE)
 		}
 
 		_, err = insertBuildingLimit(ctx, protoOut.BuildingLimit{PolygonCoordinates: coordinates})
 
 		if err != nil {
-			return nil, fmt.Errorf("while saving new building limit: %w", err)
+			ba.logger.Errorf("while saving new building limit: %w", err)
+
+			return nil, fmt.Errorf(SERVER_ERROR_MESSAGE)
 		}
 
 		polygon := createPolygon(ctx, coordinates, 0)
@@ -38,16 +50,20 @@ func (s *BuildingdataAccessServiceServer) CreateBuildingdata(ctx context.Context
 		coordinates, err := getCoordinatesFromFeature(ctx, feature)
 
 		if err != nil {
-			return nil, fmt.Errorf("while parsing coordinates from a feature: %w", err)
+			ba.logger.Errorf("while parsing coordinates from a feature: %w", err)
+
+			return nil, fmt.Errorf(SERVER_ERROR_MESSAGE)
 		}
 
 		_, err = insertHeightPlateau(ctx, protoOut.HeightPlateau{PolygonCoordinates: coordinates, Elevation: feature.Properties.Elevation})
 
 		if err != nil {
-			return nil, fmt.Errorf("while saving new height plateau: %w", err)
+			ba.logger.Errorf("while saving new height plateau: %w", err)
+
+			return nil, fmt.Errorf(SERVER_ERROR_MESSAGE)
 		}
 
-		polygon := createPolygon(ctx, coordinates, 0)
+		polygon := createPolygon(ctx, coordinates, feature.Properties.Elevation)
 		heightPlateauPolygons = append(heightPlateauPolygons, polygon)
 	}
 
@@ -57,11 +73,45 @@ func (s *BuildingdataAccessServiceServer) CreateBuildingdata(ctx context.Context
 		_, err := insertSplitBuildingLimit(ctx, *sbl)
 
 		if err != nil {
-			return nil, fmt.Errorf("while inserting split building limit: %w", err)
+			ba.logger.Errorf("while inserting split building limit: %w", err)
+
+			return nil, fmt.Errorf(SERVER_ERROR_MESSAGE)
 		}
 	}
 
 	return &protoOut.CreateBuildingdataResponse{}, nil
+}
+
+func validateExtra(ctx context.Context, req *protoOut.CreateBuildingdataRequest) error {
+	if req.BuildingLimits == nil {
+		return fmt.Errorf("building limits not provided")
+	} else if req.HeightPlateaus == nil {
+		return fmt.Errorf("height plateaus not provided")
+	} else if len(req.BuildingLimits.Features) == 0 {
+		return fmt.Errorf("no building limits features")
+	} else if len(req.HeightPlateaus.Features) == 0 {
+		return fmt.Errorf("no height plateaus features")
+	}
+
+	for _, feature := range req.BuildingLimits.Features {
+		if feature.Geometry == nil {
+			return fmt.Errorf("at least one building limits feature geometry is not set")
+		} else if feature.Geometry.Coordinates == nil {
+			return fmt.Errorf("at least one building limits feature geometry coordinates are not set")
+		}
+	}
+
+	for _, feature := range req.HeightPlateaus.Features {
+		if feature.Geometry == nil {
+			return fmt.Errorf("at least one height plateaus feature geometry is not set")
+		} else if feature.Geometry.Coordinates == nil {
+			return fmt.Errorf("at least one height plateaus feature geometry coordinates are not set")
+		} else if feature.Properties == nil {
+			return fmt.Errorf("at least one height plateaus feature properties are not set")
+		}
+	}
+
+	return nil
 }
 
 func getSplitBuildingLimitsFromPolygons(ctx context.Context, buildingLimitPolygons []s2.Polygon, heightPlateauPolygons []s2.Polygon) []*protoOut.SplitBuildingLimit {
