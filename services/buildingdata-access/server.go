@@ -51,7 +51,38 @@ func (s *BuildingdataAccessServiceServer) CreateBuildingdata(ctx context.Context
 		heightPlateauPolygons = append(heightPlateauPolygons, polygon)
 	}
 
+	splitBuildingLimits := getSplitBuildingLimitsFromPolygons(ctx, buildingLimitPolygons, heightPlateauPolygons)
+
+	for _, sbl := range splitBuildingLimits {
+		_, err := insertSplitBuildingLimit(ctx, *sbl)
+
+		if err != nil {
+			return nil, fmt.Errorf("while inserting split building limit: %w", err)
+		}
+	}
+
 	return &protoOut.CreateBuildingdataResponse{}, nil
+}
+
+func getSplitBuildingLimitsFromPolygons(ctx context.Context, buildingLimitPolygons []s2.Polygon, heightPlateauPolygons []s2.Polygon) []*protoOut.SplitBuildingLimit {
+	var splitBuildingLimits []*protoOut.SplitBuildingLimit
+
+	for _, blPolygon := range buildingLimitPolygons {
+		ba.logger.Infof("area of BL polygon: %+v", blPolygon.Area())
+		for _, hpPolygon := range heightPlateauPolygons {
+			ba.logger.Infof("area of HP polygon: %+v", hpPolygon.Area())
+
+			if !blPolygon.Intersects(&hpPolygon) {
+				ba.logger.Debugf("polygons do not intersect")
+
+				continue
+			}
+			// TODO calculate intersection and add to array
+
+		}
+	}
+
+	return splitBuildingLimits
 }
 
 func createPolygon(ctx context.Context, coordinates []*protoOut.Coordinate, elevation float64) s2.Polygon {

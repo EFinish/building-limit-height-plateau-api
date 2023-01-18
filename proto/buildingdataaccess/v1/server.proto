@@ -22,7 +22,6 @@ message CreateBuildingdataRequest {
 }
 
 message CreateBuildingdataResponse {
-	// TODO
 }
 
 message RequestBuildingLimit {

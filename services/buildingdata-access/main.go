@@ -58,14 +58,6 @@ func main() {
 
 		panic(err)
 	}
-	// TODO implement?
-	// dbDisconnect := func() {
-	// 	ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
-	// 	defer cancel()
-	// 	if err := dbClient.Disconnect(ctx); err != nil {
-	// 		panic(err)
-	// 	}
-	// }
 
 	ctx, cancel = context.WithTimeout(bgContext, 2*time.Second)
 	defer cancel()
