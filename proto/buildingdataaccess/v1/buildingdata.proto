@@ -5,18 +5,18 @@ option go_package = "go/buildingdata/v1;buildingdata";
 package buildingdata.v1;
 
 message BuildingLimit {
-    string id = 1; // @gotags: bson:"_id"
+    optional string id = 1; // @gotags: bson:"_id"
 	repeated Coordinate polygon_coordinates = 2; // @gotags: bson:"polygon_coordinates"
 }
 
 message HeightPlateau {
-    string id = 1; // @gotags: bson:"_id"
+    optional string id = 1; // @gotags: bson:"_id"
 	double elevation = 2; // @gotags: bson:"elevation"
     repeated Coordinate polygon_coordinates = 3; // @gotags: bson:"polygon_coordinates"
 }
 
 message SplitBuildingLimit {
-    string id = 1; // @gotags: bson:"_id"
+    optional string id = 1; // @gotags: bson:"_id"
 	double corresponding_height_plateau_elevation = 2; //@gotags: bson:"corresponding_height_plateau_elevation"
 	repeated Coordinate polygon_coordinates = 3; // @gotags: bson:"polygon_coordinates"
 }
